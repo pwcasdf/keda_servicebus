@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deployment
+  labels:
+    app: testapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testapp
+  template:
+    metadata:
+      labels:
+        app: testapp
+    spec:
+      containers:
+      - name: testapp
+        image: pwcasdf/goapp
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+        ports:
+        - containerPort: 8080
+      nodeSelector:
+        agentpool: targetpool
